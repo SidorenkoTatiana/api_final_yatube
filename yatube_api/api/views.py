@@ -133,7 +133,7 @@ class FollowViewSet(viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        follow = Follow.objects.create(
+        Follow.objects.create(
             user=request.user, following=following_user
         )
 
@@ -163,7 +163,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def list(self, request, post_id=None):
         try:
-            post = Post.objects.get(id=post_id)
+            Post.objects.get(id=post_id)
         except Post.DoesNotExist:
             raise NotFound("Публикация не найдена.")
 
@@ -205,7 +205,6 @@ class CommentViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_403_FORBIDDEN
             )
 
-        # Проверка аутентификации
         if not request.user.is_authenticated:
             return Response(
                 {"detail": "Учетные данные не были предоставлены."},

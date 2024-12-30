@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from posts.models import Comment, Post, Follow, Group, User
+from posts.models import Comment, Post, Follow, Group
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -21,7 +21,6 @@ class PostSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        # Убедитесь, что поле group возвращает id, если оно существует
         representation['group'] = instance.group.id if hasattr(
             instance, 'group'
         ) and instance.group else None
